@@ -1,0 +1,26 @@
+[
+  {
+    "UserId": "40096247-6837-4416-9a66-1b9a93764e0e",
+    "AvatarUrl": null,
+    "FullName": "Nguyen Thanh Dat",
+    "Telephone": "0339315466",
+    "EmailAddress": "admin",
+    "Birthday": "2024-03-01T00:00:00",
+    "Status": "Activated",
+    "Password": "admin",
+    "Role": "Admin     ",
+    "BookingReservations": []
+  },
+  {
+    "UserId": "ea7e6603-8bad-454e-9f9f-9e89a31253f0",
+    "AvatarUrl": null,
+    "FullName": "Nguyen Xuan Dat",
+    "Telephone": "098765431",
+    "EmailAddress": "xuandat.dev@gmail.com",
+    "Birthday": "2024-10-11T00:00:00",
+    "Status": "Activated",
+    "Password": "123456789aA!",
+    "Role": "Customer  ",
+    "BookingReservations": []
+  }
+]

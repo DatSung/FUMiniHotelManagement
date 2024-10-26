@@ -1,0 +1,25 @@
+﻿@page
+@model FUMiniHotelManagement.Razor.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login page";
+}
+
+<div class="text-center">
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="LoginInput.Email"></label>
+            <input asp-for="LoginInput.Email" class="form-control" />
+            <span asp-validation-for="LoginInput.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LoginInput.Password"></label>
+            <input asp-for="LoginInput.Password" class="form-control" type="password" />
+            <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

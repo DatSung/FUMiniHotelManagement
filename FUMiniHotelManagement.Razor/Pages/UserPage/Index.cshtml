@@ -1,0 +1,88 @@
+﻿@page
+@using FUMiniHotelManagement.Razor.Constant
+@model FUMiniHotelManagement.Razor.Pages.UserPage.IndexModel
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+@{
+	var role = HttpContext.Session.GetString("Role");
+	if (role is null)
+	{
+		Response.Redirect("/Login");
+		return;
+	}
+	if (role.Trim() != StaticUserRole.Admin.Trim())
+	{
+		Response.Redirect("/Unauthorize");
+		return;
+	}
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.User[0].FullName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.User[0].Telephone)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.User[0].EmailAddress)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.User[0].Birthday)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.User[0].Status)
+			</th>
+			@*  <th>
+			@Html.DisplayNameFor(model => model.User[0].Password)
+			</th> *@
+			<th>
+				@Html.DisplayNameFor(model => model.User[0].Role)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.User)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.FullName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Telephone)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EmailAddress)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Birthday)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Status)
+				</td>
+				@*  <td>
+			@Html.DisplayFor(modelItem => item.Password)
+			</td> *@
+				<td>
+					@Html.DisplayFor(modelItem => item.Role)
+				</td>
+				<td>
+					<a asp-page="./Edit" asp-route-id="@item.UserId">Edit</a> |
+					<a asp-page="./Details" asp-route-id="@item.UserId">Details</a> |
+					<a asp-page="./Delete" asp-route-id="@item.UserId">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

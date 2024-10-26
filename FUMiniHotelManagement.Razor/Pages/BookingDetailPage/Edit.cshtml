@@ -1,0 +1,61 @@
+﻿@page
+@using FUMiniHotelManagement.Razor.Constant
+@model FUMiniHotelManagement.Razor.Pages.BookingDetailPage.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@{
+    var role = HttpContext.Session.GetString("Role");
+    if (role is null)
+    {
+        Response.Redirect("/Login");
+        return;
+    }
+    if (role.Trim() != StaticUserRole.Admin.Trim())
+    {
+        Response.Redirect("/Unauthorize");
+        return;
+    }
+}
+
+<h1>Edit</h1>
+
+<h4>BookingDetail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BookingDetail.BookingReservationId" />
+            <input type="hidden" asp-for="BookingDetail.RoomId" />
+            <div class="form-group">
+                <label asp-for="BookingDetail.StartDate" class="control-label"></label>
+                <input asp-for="BookingDetail.StartDate" class="form-control" />
+                <span asp-validation-for="BookingDetail.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingDetail.EndDate" class="control-label"></label>
+                <input asp-for="BookingDetail.EndDate" class="form-control" />
+                <span asp-validation-for="BookingDetail.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingDetail.ActualPrice" class="control-label"></label>
+                <input asp-for="BookingDetail.ActualPrice" class="form-control" />
+                <span asp-validation-for="BookingDetail.ActualPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

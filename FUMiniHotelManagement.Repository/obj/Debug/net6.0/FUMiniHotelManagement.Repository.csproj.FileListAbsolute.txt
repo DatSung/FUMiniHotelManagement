@@ -1,0 +1,17 @@
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\bin\Debug\net6.0\FUMiniHotelManagement.Repository.deps.json
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\bin\Debug\net6.0\FUMiniHotelManagement.Repository.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\bin\Debug\net6.0\FUMiniHotelManagement.Repository.pdb
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\bin\Debug\net6.0\FUMiniHotelManagement.BusinessObject.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\bin\Debug\net6.0\FUMiniHotelManagement.DAO.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\bin\Debug\net6.0\FUMiniHotelManagement.DAO.pdb
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\bin\Debug\net6.0\FUMiniHotelManagement.BusinessObject.pdb
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.csproj.AssemblyReference.cache
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.AssemblyInfoInputs.cache
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.AssemblyInfo.cs
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.csproj.CoreCompileInputs.cache
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\refint\FUMiniHotelManagement.Repository.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.pdb
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\ref\FUMiniHotelManagement.Repository.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.csproj.CopyComplete

@@ -1,0 +1,68 @@
+﻿@page
+@using FUMiniHotelManagement.Razor.Constant
+@model FUMiniHotelManagement.Razor.Pages.BookingDetailPage.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@{
+    var role = HttpContext.Session.GetString("Role");
+    if (role is null)
+    {
+        Response.Redirect("/Login");
+        return;
+    }
+    if (role.Trim() != StaticUserRole.Admin.Trim())
+    {
+        Response.Redirect("/Unauthorize");
+        return;
+    }
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BookingDetail</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingDetail.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingDetail.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingDetail.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingDetail.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingDetail.ActualPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingDetail.ActualPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingDetail.BookingReservation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingDetail.BookingReservation.BookingReservationId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingDetail.Room)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingDetail.Room.RoomNumber)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="BookingDetail.BookingReservationId" />
+        <input type="hidden" asp-for="BookingDetail.RoomId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

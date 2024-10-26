@@ -1,0 +1,159 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = FUMiniHotelManagement.Razor
+build_property.RootNamespace = FUMiniHotelManagement.Razor
+build_property.ProjectDir = C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Razor\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Razor
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingDetailPage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ0RldGFpbFBhZ2VcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingDetailPage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ0RldGFpbFBhZ2VcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingDetailPage/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ0RldGFpbFBhZ2VcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingDetailPage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ0RldGFpbFBhZ2VcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingDetailPage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ0RldGFpbFBhZ2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingReservationPage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1Jlc2VydmF0aW9uUGFnZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingReservationPage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1Jlc2VydmF0aW9uUGFnZVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingReservationPage/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1Jlc2VydmF0aW9uUGFnZVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingReservationPage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1Jlc2VydmF0aW9uUGFnZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/BookingReservationPage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQm9va2luZ1Jlc2VydmF0aW9uUGFnZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomPage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVBhZ2VcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomPage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVBhZ2VcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomPage/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVBhZ2VcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomPage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVBhZ2VcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomPage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVBhZ2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomTypePage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVR5cGVQYWdlXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomTypePage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVR5cGVQYWdlXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomTypePage/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVR5cGVQYWdlXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomTypePage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVR5cGVQYWdlXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/RoomTypePage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9vbVR5cGVQYWdlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/Unauthorize.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVW5hdXRob3JpemUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/UserPage/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclBhZ2VcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/UserPage/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclBhZ2VcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/UserPage/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclBhZ2VcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/UserPage/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclBhZ2VcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/UserPage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclBhZ2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/FPT_University_Sources/After_OJT/Term_7/PRN221/FUMiniHotelManagement/FUMiniHotelManagement.Razor/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-z3syti3of7

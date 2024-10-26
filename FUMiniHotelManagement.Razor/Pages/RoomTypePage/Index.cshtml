@@ -1,0 +1,63 @@
+﻿@page
+@using FUMiniHotelManagement.Razor.Constant
+@model FUMiniHotelManagement.Razor.Pages.RoomTypePage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    var role = HttpContext.Session.GetString("Role");
+    if (role is null)
+    {
+        Response.Redirect("/Login");
+        return;
+    }
+    if (role.Trim() != StaticUserRole.Admin.Trim())
+    {
+        Response.Redirect("/Unauthorize");
+        return;
+    }
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomType[0].RoomTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomType[0].TypeDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomType[0].TypeNote)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.RoomType) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeNote)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RoomTypeId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.RoomTypeId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.RoomTypeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,75 @@
+﻿@page
+@using FUMiniHotelManagement.Razor.Constant
+@model FUMiniHotelManagement.Razor.Pages.BookingDetailPage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    var role = HttpContext.Session.GetString("Role");
+    if (role is null)
+    {
+        Response.Redirect("/Login");
+        return;
+    }
+    if (role.Trim() != StaticUserRole.Admin.Trim())
+    {
+        Response.Redirect("/Unauthorize");
+        return;
+    }
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDetail[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDetail[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDetail[0].ActualPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDetail[0].BookingReservation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDetail[0].Room)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.BookingDetail) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingReservation.BookingReservationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.RoomNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

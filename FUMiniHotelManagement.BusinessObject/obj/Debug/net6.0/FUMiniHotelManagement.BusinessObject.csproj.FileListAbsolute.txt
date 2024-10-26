@@ -1,0 +1,11 @@
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\bin\Debug\net6.0\FUMiniHotelManagement.BusinessObject.deps.json
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\bin\Debug\net6.0\FUMiniHotelManagement.BusinessObject.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\bin\Debug\net6.0\FUMiniHotelManagement.BusinessObject.pdb
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\obj\Debug\net6.0\FUMiniHotelManagement.BusinessObject.GeneratedMSBuildEditorConfig.editorconfig
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\obj\Debug\net6.0\FUMiniHotelManagement.BusinessObject.AssemblyInfoInputs.cache
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\obj\Debug\net6.0\FUMiniHotelManagement.BusinessObject.AssemblyInfo.cs
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\obj\Debug\net6.0\FUMiniHotelManagement.BusinessObject.csproj.CoreCompileInputs.cache
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\obj\Debug\net6.0\FUMiniHotelManagement.BusinessObject.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\obj\Debug\net6.0\refint\FUMiniHotelManagement.BusinessObject.dll
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\obj\Debug\net6.0\FUMiniHotelManagement.BusinessObject.pdb
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.BusinessObject\obj\Debug\net6.0\ref\FUMiniHotelManagement.BusinessObject.dll

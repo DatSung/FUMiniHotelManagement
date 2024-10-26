@@ -1,0 +1,70 @@
+﻿<Page x:Class="FUMiniHotelManagement.WPF.Pages.BookingDetailTablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FUMiniHotelManagement.WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="630" d:DesignWidth="990"
+      Title="BookingDetailTablePage">
+
+    <Page.Resources>
+        <Style x:Key="SidebarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <ListView x:Name="BookingDetailListView" HorizontalAlignment="Center" Height="510" Margin="0,110,0,0" VerticalAlignment="Top" Width="970" d:ItemsSource="{d:SampleData ItemCount=5}" Loaded="OnLoaded">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="BookingReservationId" Width="120" DisplayMemberBinding="{Binding BookingReservationId}"/>
+                    <GridViewColumn Header="RoomId" Width="200" DisplayMemberBinding="{Binding RoomId}"/>
+                    <GridViewColumn Header="StartDate" Width="200" DisplayMemberBinding="{Binding StartDate}"/>
+                    <GridViewColumn Header="EndDate" Width="200" DisplayMemberBinding="{Binding EndDate}"/>
+                    <GridViewColumn Header="ActualPrice" Width="200" DisplayMemberBinding="{Binding ActualPrice}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="CreateButton" Content="Create" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="CreateButton_Click" />
+        <Button x:Name="UpdateButton" Content="Update" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Click="UpdateButton_Click" />
+        <Button x:Name="DeleteButton" Content="Delete" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" Click="DeleteButton_Click" />
+
+        <TextBox x:Name="SearchText" HorizontalAlignment="Left" Margin="557,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="298" Height="40"/>
+        <Button x:Name="SearchButton" Content="Search" Style="{StaticResource SidebarButtonStyle}" HorizontalAlignment="Left" Margin="860,10,0,0" VerticalAlignment="Top" Click="SearchButton_Click" />
+
+        <Label Content="Booking Detail Management" 
+       HorizontalAlignment="Left" 
+       VerticalAlignment="Top" 
+       Margin="10,55,0,0" 
+       Height="50" 
+       Width="370" 
+       Foreground="#333333"   
+            FontSize="28"
+            FontWeight="Bold"
+            Background="Transparent"
+            Padding="5" />
+    </Grid>
+</Page>

@@ -1,0 +1,52 @@
+﻿@page
+@using FUMiniHotelManagement.Razor.Constant
+@model FUMiniHotelManagement.Razor.Pages.RoomTypePage.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@{
+    var role = HttpContext.Session.GetString("Role");
+    if (role is null)
+    {
+        Response.Redirect("/Login");
+        return;
+    }
+    if (role.Trim() != StaticUserRole.Admin.Trim())
+    {
+        Response.Redirect("/Unauthorize");
+        return;
+    }
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>RoomType</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoomType.RoomTypeName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoomType.RoomTypeName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoomType.TypeDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoomType.TypeDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoomType.TypeNote)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoomType.TypeNote)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.RoomType?.RoomTypeId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

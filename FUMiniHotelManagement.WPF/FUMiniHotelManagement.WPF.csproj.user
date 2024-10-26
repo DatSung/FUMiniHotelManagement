@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="AdminDashboardWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\BookingDetailTablePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\BookingTablePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\CustomerTablePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\RoomTablePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SideBarPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\UserProfilePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UpsertBookingDetailWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UpsertBookingWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UpsertCustomerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UpsertRoomWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="AdminDashboardWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\BookingDetailTablePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\BookingTablePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CustomerTablePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\RoomTablePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SideBarPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\UserProfilePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UpsertBookingWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UpsertCustomerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UpsertRoomWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
