@@ -14,13 +14,10 @@ namespace FUMiniHotelManagement.Razor.Pages.UserPage
 {
     public class EditModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
         private readonly IUserService _userService;
 
-        public EditModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context,
-            IUserService userService)
+        public EditModel(IUserService userService)
         {
-            _context = context;
             _userService = userService;
         }
 

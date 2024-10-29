@@ -7,54 +7,58 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.UserPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IUserService _userService;
 
-        public DeleteModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public DeleteModel(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
-        [BindProperty]
-      public User User { get; set; } = default!;
+        [BindProperty] public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Users == null)
+            var users = await _userService.GetAllUserAsync();
+            if (id == null || users == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(m => m.UserId == id);
+            var user = await _userService.GetUserByIdAsync(id.Value);
 
             if (user == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 User = user;
             }
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.Users == null)
+            var users = await _userService.GetAllUserAsync();
+            if (id == null || users == null)
             {
                 return NotFound();
             }
-            var user = await _context.Users.FindAsync(id);
+
+            var user = await _userService.GetUserByIdAsync(id.Value);
 
             if (user != null)
             {
                 User = user;
-                _context.Users.Remove(User);
-                await _context.SaveChangesAsync();
+
+                await _userService.DeleteUserAsync(User);
             }
 
             return RedirectToPage("./Index");

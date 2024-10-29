@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.UserPage
 {
     public class CreateModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IUserService _userService;
 
-        public CreateModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public CreateModel(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         public IActionResult OnGet()
@@ -24,20 +25,20 @@ namespace FUMiniHotelManagement.Razor.Pages.UserPage
             return Page();
         }
 
-        [BindProperty]
-        public User User { get; set; } = default!;
-        
+        [BindProperty] public User User { get; set; } = default!;
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Users == null || User == null)
+            var users = await _userService.GetAllUserAsync();
+            
+            if (!ModelState.IsValid || users == null || User == null)
             {
                 return Page();
             }
 
-            _context.Users.Add(User);
-            await _context.SaveChangesAsync();
+            await _userService.CreateUserAsync(User);
 
             return RedirectToPage("./Index");
         }
