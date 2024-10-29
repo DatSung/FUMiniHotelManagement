@@ -8,33 +8,39 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.UserPage
 {
     public class EditModel : PageModel
     {
         private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IUserService _userService;
 
-        public EditModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public EditModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context,
+            IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
-        [BindProperty]
-        public User User { get; set; } = default!;
+        [BindProperty] public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Users == null)
+            var users = await _userService.GetAllUserAsync();
+            if (id == null || users == null)
             {
                 return NotFound();
             }
 
-            var user =  await _context.Users.FirstOrDefaultAsync(m => m.UserId == id);
+            var user = await _userService.GetUserByIdAsync(id.Value);
+
             if (user == null)
             {
                 return NotFound();
             }
+
             User = user;
             return Page();
         }
@@ -48,13 +54,11 @@ namespace FUMiniHotelManagement.Razor.Pages.UserPage
                 return Page();
             }
 
-            _context.Attach(User).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _userService.UpdateUserAsync(User);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
                 if (!UserExists(User.UserId))
                 {
@@ -71,7 +75,7 @@ namespace FUMiniHotelManagement.Razor.Pages.UserPage
 
         private bool UserExists(Guid id)
         {
-          return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
+            return _userService.GetUserByIdAsync(id).GetAwaiter().GetResult() is not null;
         }
     }
 }

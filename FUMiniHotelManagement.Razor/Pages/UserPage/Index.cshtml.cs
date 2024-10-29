@@ -7,25 +7,26 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.UserPage
 {
     public class IndexModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
-
-        public IndexModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        private readonly IUserService _userService;
+        public IndexModel( IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         public IList<User> User { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Users != null)
+            var users = await _userService.GetAllUserAsync();
+            if (users != null)
             {
-                User = await _context.Users.ToListAsync();
+                User = users.ToList();
             }
         }
     }

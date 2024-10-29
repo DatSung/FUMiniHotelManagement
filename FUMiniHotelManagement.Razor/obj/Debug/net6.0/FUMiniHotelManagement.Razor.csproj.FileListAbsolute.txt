@@ -283,4 +283,5 @@ C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHo
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Razor\bin\Debug\net6.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Razor\bin\Debug\net6.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Razor\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
-C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Razor\obj\Debug\net6.0\FUMiniHo.393C9049.Up2Date
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Razor\obj\Debug\net6.0\FUMiniHotelManagement.Razor.sourcelink.json
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Razor\obj\Debug\net6.0\FUMiniHotelManagement.Razor.csproj.CopyComplete

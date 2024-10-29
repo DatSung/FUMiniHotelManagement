@@ -15,3 +15,4 @@ C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHo
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.DAO\bin\Debug\net6.0\FUMiniHotelManagement.BusinessObject.dll
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.DAO\bin\Debug\net6.0\FUMiniHotelManagement.BusinessObject.pdb
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.DAO\obj\Debug\net6.0\FUMiniHotelManagement.DAO.csproj.CopyComplete
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.DAO\obj\Debug\net6.0\FUMiniHotelManagement.DAO.sourcelink.json

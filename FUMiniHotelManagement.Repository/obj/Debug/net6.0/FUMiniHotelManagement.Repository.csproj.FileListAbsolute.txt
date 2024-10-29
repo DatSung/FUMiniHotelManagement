@@ -15,3 +15,4 @@ C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHo
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.pdb
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\ref\FUMiniHotelManagement.Repository.dll
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.csproj.CopyComplete
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.Repository\obj\Debug\net6.0\FUMiniHotelManagement.Repository.sourcelink.json

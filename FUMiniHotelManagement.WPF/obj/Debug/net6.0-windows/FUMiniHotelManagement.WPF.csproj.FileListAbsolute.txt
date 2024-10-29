@@ -89,3 +89,4 @@ C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHo
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.WPF\bin\Debug\net6.0-windows\Images\user_icon.jpg
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.WPF\obj\Debug\net6.0-windows\FUMiniHotelManagement.WPF_Content.g.cs
 C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.WPF\obj\Debug\net6.0-windows\FUMiniHotelManagement.WPF.csproj.CopyComplete
+C:\FPT_University_Sources\After_OJT\Term_7\PRN221\FUMiniHotelManagement\FUMiniHotelManagement.WPF\obj\Debug\net6.0-windows\FUMiniHotelManagement.WPF.sourcelink.json
