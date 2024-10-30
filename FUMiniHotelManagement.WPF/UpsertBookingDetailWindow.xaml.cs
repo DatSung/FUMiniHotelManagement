@@ -34,7 +34,8 @@ namespace FUMiniHotelManagement.WPF
             InitializeComponent();
         }
 
-        public UpsertBookingDetailWindow(IBookingDetailService bookingDetailService, Guid bookingId, BookingDetail? bookingDetail, Func<Task> refreshListView)
+        public UpsertBookingDetailWindow(IBookingDetailService bookingDetailService, Guid bookingId,
+            BookingDetail? bookingDetail, Func<Task> refreshListView)
         {
             InitializeComponent();
             this.bookingDetailService = bookingDetailService;
@@ -47,35 +48,43 @@ namespace FUMiniHotelManagement.WPF
 
         private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            if (bookingDetail is null)
+            try
             {
-                bookingDetail = FillBookingDetailWithForm();
-                var result = await bookingDetailService.CreateBookingDetailAsync(bookingDetail);
-
-                if (result is false)
+                if (bookingDetail is null)
                 {
-                    MessageBox.Show("Something went wrong!");
-                    return;
-                }
+                    bookingDetail = FillBookingDetailWithForm();
+                    var result = await bookingDetailService.CreateBookingDetailAsync(bookingDetail);
 
-                if (result) await CaculateBookingTotalPrice();
-                await refreshListView();
-                this.Close();
+                    if (result is false)
+                    {
+                        MessageBox.Show("Something went wrong!");
+                        return;
+                    }
+
+                    if (result) await CaculateBookingTotalPrice();
+                    await refreshListView();
+                    this.Close();
+                }
+                else
+                {
+                    bookingDetail = FillBookingDetailWithForm();
+                    var result = await bookingDetailService.UpdateBookingDetailAsync(bookingDetail);
+
+                    if (result is false)
+                    {
+                        MessageBox.Show("Something went wrong!");
+                        return;
+                    }
+
+                    if (result) await CaculateBookingTotalPrice();
+                    await refreshListView();
+                    this.Close();
+                }
             }
-            else
+            catch (Exception exception)
             {
-                bookingDetail = FillBookingDetailWithForm();
-                var result = await bookingDetailService.UpdateBookingDetailAsync(bookingDetail);
-
-                if (result is false)
-                {
-                    MessageBox.Show("Something went wrong!");
-                    return;
-                }
-
-                if (result) await CaculateBookingTotalPrice();
-                await refreshListView();
-                this.Close();
+                MessageBox.Show("Something went wrong!");
+                return;
             }
         }
 
@@ -91,6 +100,7 @@ namespace FUMiniHotelManagement.WPF
             {
                 return;
             }
+
             FillFormWithBookingDetail();
         }
 
@@ -105,7 +115,6 @@ namespace FUMiniHotelManagement.WPF
 
         private BookingDetail FillBookingDetailWithForm()
         {
-
             return new BookingDetail()
             {
                 BookingReservationId = bookingId,

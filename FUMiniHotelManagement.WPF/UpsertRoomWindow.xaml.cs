@@ -42,29 +42,38 @@ namespace FUMiniHotelManagement.WPF
 
 		private async void SubmitButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (roomInformation is null)
+			try
 			{
-				var room = FillRoomWithForm();
-				var result = await roomService.CreateRoomAsync(room);
-				if (result is false)
+				if (roomInformation is null)
 				{
-					MessageBox.Show("Something went wrong!");
-					return;
+					var room = FillRoomWithForm();
+					var result = await roomService.CreateRoomAsync(room);
+					if (result is false)
+					{
+						MessageBox.Show("Something went wrong!");
+						return;
+					}
+
+					await refreshListView();
+					this.Close();
 				}
-				await refreshListView();
-				this.Close();
+				else
+				{
+					var room = FillRoomWithForm();
+					var result = await roomService.UpdateRoomAsync(room);
+					if (result is false)
+					{
+						MessageBox.Show("Something went wrong!");
+						return;
+					}
+
+					await refreshListView();
+					this.Close();
+				}
 			}
-			else
+			catch (Exception exception)
 			{
-				var room = FillRoomWithForm();
-				var result = await roomService.UpdateRoomAsync(room);
-				if (result is false)
-				{
-					MessageBox.Show("Something went wrong!");
-					return;
-				}
-				await refreshListView();
-				this.Close();
+				MessageBox.Show("Something went wrong!");
 			}
 		}
 

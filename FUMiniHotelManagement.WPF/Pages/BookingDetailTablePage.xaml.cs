@@ -25,6 +25,8 @@ namespace FUMiniHotelManagement.WPF.Pages
     {
         private Guid bookingId;
         private IBookingDetailService bookingDetailService;
+        private IBookingService bookingService;
+
         public BookingDetailTablePage()
         {
             InitializeComponent();
@@ -34,12 +36,14 @@ namespace FUMiniHotelManagement.WPF.Pages
         {
             InitializeComponent();
             this.bookingId = bookingId;
+            bookingService = new BookingService();
             this.bookingDetailService = new BookingDetailService();
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            UpsertBookingDetailWindow upsertBookingDetailWindow = new UpsertBookingDetailWindow(bookingDetailService, bookingId, null, RefreshListView);
+            UpsertBookingDetailWindow upsertBookingDetailWindow =
+                new UpsertBookingDetailWindow(bookingDetailService, bookingId, null, RefreshListView);
             upsertBookingDetailWindow.ShowDialog();
         }
 
@@ -53,9 +57,11 @@ namespace FUMiniHotelManagement.WPF.Pages
                 {
                     return;
                 }
-                UpsertBookingDetailWindow upsertBookingDetailWindow = new UpsertBookingDetailWindow(bookingDetailService, bookingId, selectedBookingDetail, RefreshListView);
-                upsertBookingDetailWindow.ShowDialog();
 
+                UpsertBookingDetailWindow upsertBookingDetailWindow =
+                    new UpsertBookingDetailWindow(bookingDetailService, bookingId, selectedBookingDetail,
+                        RefreshListView);
+                upsertBookingDetailWindow.ShowDialog();
             }
         }
 
@@ -71,13 +77,13 @@ namespace FUMiniHotelManagement.WPF.Pages
                 }
 
                 await bookingDetailService.DeleteBookingDetailAsync(selectedBookingDetail);
+                await CalculateBookingTotalPrice();
                 await RefreshListView();
             }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
@@ -87,7 +93,17 @@ namespace FUMiniHotelManagement.WPF.Pages
 
         private async Task RefreshListView()
         {
-            BookingDetailListView.ItemsSource = await bookingDetailService.GetAllBookingDetailByBookingIdAsync(bookingId);
+            BookingDetailListView.ItemsSource =
+                await bookingDetailService.GetAllBookingDetailByBookingIdAsync(bookingId);
+        }
+
+        private async Task CalculateBookingTotalPrice()
+        {
+            var bookingDetails = await bookingDetailService.GetAllBookingDetailByBookingIdAsync(bookingId);
+            var totalPrice = bookingDetails.Sum(x => x.ActualPrice);
+            var booking = await bookingService.GetBookingByIdAsync(bookingId);
+            booking.TotalPrice = totalPrice;
+            await bookingService.UpdateBookingAsync(booking);
         }
     }
 }
