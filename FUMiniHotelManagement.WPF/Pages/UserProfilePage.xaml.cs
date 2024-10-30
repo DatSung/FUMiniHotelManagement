@@ -91,6 +91,7 @@ namespace FUMiniHotelManagement.WPF.Pages
                 EmailAddress = emailAddress,
                 Birthday = birthday,
                 Status = status,
+                AvatarUrl = admin.AvatarUrl,
                 Password = password,
                 Role = role
             };
