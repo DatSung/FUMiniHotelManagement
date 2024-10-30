@@ -8,16 +8,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
 {
     public class EditModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
 
-        public EditModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        private readonly IRoomTypeService _roomTypeService;
+        
+        public EditModel(IRoomTypeService roomTypeService)
         {
-            _context = context;
+            _roomTypeService = roomTypeService;
         }
 
         [BindProperty]
@@ -25,17 +27,18 @@ namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.RoomTypes == null)
+            var roomTypes = await _roomTypeService.GetAllRoomTypeAsync(); 
+            if (id == null || roomTypes == null)
             {
                 return NotFound();
             }
 
-            var roomtype =  await _context.RoomTypes.FirstOrDefaultAsync(m => m.RoomTypeId == id);
-            if (roomtype == null)
+            var roomType = await _roomTypeService.GetRoomTypeByIdAsync(id.Value);
+            if (roomType == null)
             {
                 return NotFound();
             }
-            RoomType = roomtype;
+            RoomType = roomType;
             return Page();
         }
 
@@ -48,11 +51,9 @@ namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
                 return Page();
             }
 
-            _context.Attach(RoomType).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _roomTypeService.UpdateRoomTypeAsync(RoomType);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -71,7 +72,7 @@ namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
 
         private bool RoomTypeExists(Guid id)
         {
-          return (_context.RoomTypes?.Any(e => e.RoomTypeId == id)).GetValueOrDefault();
+          return _roomTypeService.GetRoomTypeByIdAsync(id).GetAwaiter().GetResult() is not null;
         }
     }
 }

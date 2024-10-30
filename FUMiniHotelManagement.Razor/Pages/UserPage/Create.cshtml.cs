@@ -31,9 +31,8 @@ namespace FUMiniHotelManagement.Razor.Pages.UserPage
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            var users = await _userService.GetAllUserAsync();
             
-            if (!ModelState.IsValid || users == null || User == null)
+            if (!ModelState.IsValid || User == null)
             {
                 return Page();
             }

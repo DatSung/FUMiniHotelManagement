@@ -7,36 +7,38 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
 {
     public class DetailsModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
-
-        public DetailsModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        private readonly IRoomTypeService _roomTypeService;
+        public DetailsModel(IRoomTypeService roomTypeService)
         {
-            _context = context;
+            _roomTypeService = roomTypeService;
         }
 
-      public RoomType RoomType { get; set; } = default!; 
+        public RoomType RoomType { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.RoomTypes == null)
+            var roomTypes = await _roomTypeService.GetAllRoomTypeAsync();
+            if (id == null || roomTypes == null)
             {
                 return NotFound();
             }
 
-            var roomtype = await _context.RoomTypes.FirstOrDefaultAsync(m => m.RoomTypeId == id);
-            if (roomtype == null)
+            var roomType = roomTypes.FirstOrDefault(x=> x.RoomTypeId == id);
+            if (roomType == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
-                RoomType = roomtype;
+                RoomType = roomType;
             }
+
             return Page();
         }
     }

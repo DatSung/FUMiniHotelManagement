@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
 {
     public class CreateModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IRoomTypeService _roomTypeService;
 
-        public CreateModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public CreateModel(IRoomTypeService roomTypeService)
         {
-            _context = context;
+            _roomTypeService = roomTypeService;
         }
 
         public IActionResult OnGet()
@@ -24,20 +25,18 @@ namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
             return Page();
         }
 
-        [BindProperty]
-        public RoomType RoomType { get; set; } = default!;
-        
+        [BindProperty] public RoomType RoomType { get; set; } = default!;
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.RoomTypes == null || RoomType == null)
+            if (!ModelState.IsValid || RoomType == null)
             {
                 return Page();
             }
 
-            _context.RoomTypes.Add(RoomType);
-            await _context.SaveChangesAsync();
+            await _roomTypeService.CreateRoomTypeAsync(RoomType);
 
             return RedirectToPage("./Index");
         }

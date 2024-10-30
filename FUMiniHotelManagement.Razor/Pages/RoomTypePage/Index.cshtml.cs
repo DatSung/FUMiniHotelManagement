@@ -7,25 +7,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
 {
     public class IndexModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IRoomTypeService _roomTypeService;
 
-        public IndexModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public IndexModel(IRoomTypeService roomTypeService)
         {
-            _context = context;
+            _roomTypeService = roomTypeService;
         }
 
-        public IList<RoomType> RoomType { get;set; } = default!;
+        public IList<RoomType> RoomType { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.RoomTypes != null)
+            var roomTypes = await _roomTypeService.GetAllRoomTypeAsync();
+            if (roomTypes != null)
             {
-                RoomType = await _context.RoomTypes.ToListAsync();
+                RoomType = roomTypes.ToList();
             }
         }
     }

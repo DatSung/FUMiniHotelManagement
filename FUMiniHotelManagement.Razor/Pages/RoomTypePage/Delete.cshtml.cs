@@ -7,54 +7,57 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
 {
     public class DeleteModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IRoomTypeService _roomTypeService;
 
-        public DeleteModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public DeleteModel(IRoomTypeService roomTypeService)
         {
-            _context = context;
+            _roomTypeService = roomTypeService;
         }
 
-        [BindProperty]
-      public RoomType RoomType { get; set; } = default!;
+        [BindProperty] public RoomType RoomType { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.RoomTypes == null)
+            var roomTypes = await _roomTypeService.GetAllRoomTypeAsync();
+            if (id == null || roomTypes == null)
             {
                 return NotFound();
             }
 
-            var roomtype = await _context.RoomTypes.FirstOrDefaultAsync(m => m.RoomTypeId == id);
+            var roomType = roomTypes.FirstOrDefault(x => x.RoomTypeId == id);
 
-            if (roomtype == null)
+            if (roomType == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
-                RoomType = roomtype;
+                RoomType = roomType;
             }
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.RoomTypes == null)
+            var roomTypes = await _roomTypeService.GetAllRoomTypeAsync();
+            if (id == null || roomTypes == null)
             {
                 return NotFound();
             }
-            var roomtype = await _context.RoomTypes.FindAsync(id);
 
-            if (roomtype != null)
+            var roomType = roomTypes.FirstOrDefault(x => x.RoomTypeId == id);
+
+            if (roomType != null)
             {
-                RoomType = roomtype;
-                _context.RoomTypes.Remove(RoomType);
-                await _context.SaveChangesAsync();
+                RoomType = roomType;
+                await _roomTypeService.DeleteRoomTypeAsync(RoomType);
             }
 
             return RedirectToPage("./Index");
