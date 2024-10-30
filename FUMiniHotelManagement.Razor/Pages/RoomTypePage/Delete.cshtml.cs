@@ -46,13 +46,12 @@ namespace FUMiniHotelManagement.Razor.Pages.RoomTypePage
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            var roomTypes = await _roomTypeService.GetAllRoomTypeAsync();
-            if (id == null || roomTypes == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var roomType = roomTypes.FirstOrDefault(x => x.RoomTypeId == id);
+            var roomType = await _roomTypeService.GetRoomTypeByIdAsync(id.Value);
 
             if (roomType != null)
             {

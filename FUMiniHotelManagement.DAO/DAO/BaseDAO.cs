@@ -109,7 +109,7 @@ namespace FUMiniHotelManagement.DAO.DAOS
 		}
 
 
-		public async Task<T?> RetriveAsync(Expression<Func<T, bool>> filter, string? includeProperties = null)
+		public async Task<T> RetriveAsync(Expression<Func<T, bool>> filter, string? includeProperties = null)
 		{
             _Context = new FUMiniHotelManagementContext();
             DbSet = _Context.Set<T>();

@@ -8,35 +8,39 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.RoomPage
 {
     public class EditModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IRoomService _roomService;
+        private readonly IRoomTypeService _roomTypeService;
 
-        public EditModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public EditModel(IRoomService roomService, IRoomTypeService roomTypeService)
         {
-            _context = context;
+            _roomService = roomService;
+            _roomTypeService = roomTypeService;
         }
 
-        [BindProperty]
-        public RoomInformation RoomInformation { get; set; } = default!;
+        [BindProperty] public RoomInformation RoomInformation { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.RoomInformations == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var roominformation =  await _context.RoomInformations.FirstOrDefaultAsync(m => m.RoomId == id);
+            var roominformation = await _roomService.GetRoomByIdAsync(id.Value);
             if (roominformation == null)
             {
                 return NotFound();
             }
+
             RoomInformation = roominformation;
-           ViewData["RoomTypeId"] = new SelectList(_context.RoomTypes, "RoomTypeId", "RoomTypeName");
+            ViewData["RoomTypeId"] =
+                new SelectList(await _roomTypeService.GetAllRoomTypeAsync(), "RoomTypeId", "RoomTypeName");
             return Page();
         }
 
@@ -49,11 +53,9 @@ namespace FUMiniHotelManagement.Razor.Pages.RoomPage
                 return Page();
             }
 
-            _context.Attach(RoomInformation).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _roomService.UpdateRoomAsync(RoomInformation);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,7 +74,7 @@ namespace FUMiniHotelManagement.Razor.Pages.RoomPage
 
         private bool RoomInformationExists(Guid id)
         {
-          return (_context.RoomInformations?.Any(e => e.RoomId == id)).GetValueOrDefault();
+            return _roomService.GetRoomByIdAsync(id).GetAwaiter().GetResult() is not null;
         }
     }
 }

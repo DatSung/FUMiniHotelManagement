@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FUMiniHotelManagement.Razor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+765ae971145cf61f38a20471c3783b75df0a4d1d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ba20fe39e01a78fd9196b109497a5952fb9eca2")]
 [assembly: System.Reflection.AssemblyProductAttribute("FUMiniHotelManagement.Razor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FUMiniHotelManagement.Razor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

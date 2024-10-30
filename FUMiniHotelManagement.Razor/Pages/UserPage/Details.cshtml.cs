@@ -24,8 +24,8 @@ namespace FUMiniHotelManagement.Razor.Pages.UserPage
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            var users = await _userService.GetAllUserAsync();
-            if (id == null || users == null)
+          
+            if (id == null)
             {
                 return NotFound();
             }

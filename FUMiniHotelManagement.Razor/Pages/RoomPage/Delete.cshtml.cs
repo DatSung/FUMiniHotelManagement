@@ -7,54 +7,55 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.RoomPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IRoomService _roomService;
 
-        public DeleteModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public DeleteModel(IRoomService roomService)
         {
-            _context = context;
+            _roomService = roomService;
         }
 
-        [BindProperty]
-      public RoomInformation RoomInformation { get; set; } = default!;
+        [BindProperty] public RoomInformation RoomInformation { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.RoomInformations == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var roominformation = await _context.RoomInformations.FirstOrDefaultAsync(m => m.RoomId == id);
+            var roominformation = await _roomService.GetRoomByIdAsync(id.Value);
 
             if (roominformation == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 RoomInformation = roominformation;
             }
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.RoomInformations == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            var roominformation = await _context.RoomInformations.FindAsync(id);
+
+            var roominformation = await _roomService.GetRoomByIdAsync(id.Value);
 
             if (roominformation != null)
             {
                 RoomInformation = roominformation;
-                _context.RoomInformations.Remove(RoomInformation);
-                await _context.SaveChangesAsync();
+                await _roomService.DeleteRoomAsync(RoomInformation);
             }
 
             return RedirectToPage("./Index");
