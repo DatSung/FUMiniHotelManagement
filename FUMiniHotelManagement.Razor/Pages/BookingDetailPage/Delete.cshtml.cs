@@ -7,54 +7,57 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.BookingDetailPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IBookingDetailService _bookingDetailService;
 
-        public DeleteModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public DeleteModel(IBookingDetailService bookingDetailService)
         {
-            _context = context;
+            _bookingDetailService = bookingDetailService;
         }
 
-        [BindProperty]
-      public BookingDetail BookingDetail { get; set; } = default!;
+        [BindProperty] public BookingDetail BookingDetail { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id, Guid? roomId)
         {
-            if (id == null || _context.BookingDetails == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var bookingdetail = await _context.BookingDetails.FirstOrDefaultAsync(m => m.BookingReservationId == id);
+            var bookingdetail = _bookingDetailService.GetAllBookingDetailByBookingIdAsync(id.Value).GetAwaiter()
+                .GetResult().FirstOrDefault(x => x.RoomId == roomId);
 
             if (bookingdetail == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 BookingDetail = bookingdetail;
             }
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        public async Task<IActionResult> OnPostAsync(Guid? id, Guid? roomId)
         {
-            if (id == null || _context.BookingDetails == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            var bookingdetail = await _context.BookingDetails.FindAsync(id);
+
+            var bookingdetail = _bookingDetailService.GetAllBookingDetailByBookingIdAsync(id.Value).GetAwaiter()
+                .GetResult().FirstOrDefault(x => x.RoomId == roomId);
 
             if (bookingdetail != null)
             {
                 BookingDetail = bookingdetail;
-                _context.BookingDetails.Remove(BookingDetail);
-                await _context.SaveChangesAsync();
+                await _bookingDetailService.DeleteBookingDetailAsync(BookingDetail);
             }
 
             return RedirectToPage("./Index");

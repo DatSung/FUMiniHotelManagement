@@ -8,36 +8,46 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.BookingDetailPage
 {
     public class EditModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IBookingDetailService _bookingDetailService;
+        private readonly IBookingService _bookingService;
+        private readonly IRoomService _roomService;
 
-        public EditModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+
+        public EditModel(IBookingDetailService bookingDetailService, IBookingService bookingService,
+            IRoomService roomService)
         {
-            _context = context;
+            _bookingDetailService = bookingDetailService;
+            _bookingService = bookingService;
+            _roomService = roomService;
         }
 
-        [BindProperty]
-        public BookingDetail BookingDetail { get; set; } = default!;
+        [BindProperty] public BookingDetail BookingDetail { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id, Guid? roomId)
         {
-            if (id == null || _context.BookingDetails == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var bookingdetail =  await _context.BookingDetails.FirstOrDefaultAsync(m => m.BookingReservationId == id);
+            var bookingdetail = _bookingDetailService.GetAllBookingDetailByBookingIdAsync(id.Value).GetAwaiter()
+                .GetResult().FirstOrDefault(x => x.RoomId == roomId);
             if (bookingdetail == null)
             {
                 return NotFound();
             }
+
             BookingDetail = bookingdetail;
-           ViewData["BookingReservationId"] = new SelectList(_context.BookingReservations, "BookingReservationId", "BookingReservationId");
-           ViewData["RoomId"] = new SelectList(_context.RoomInformations, "RoomId", "RoomNumber");
+            ViewData["BookingReservationId"] = new SelectList(await _bookingService.GetAllBookingAsync(),
+                "BookingReservationId",
+                "BookingReservationId");
+            ViewData["RoomId"] = new SelectList(await _roomService.GetAllRoomAsync(), "RoomId", "RoomNumber");
             return Page();
         }
 
@@ -47,18 +57,20 @@ namespace FUMiniHotelManagement.Razor.Pages.BookingDetailPage
         {
             if (!ModelState.IsValid)
             {
+                ViewData["BookingReservationId"] = new SelectList(await _bookingService.GetAllBookingAsync(),
+                    "BookingReservationId",
+                    "BookingReservationId");
+                ViewData["RoomId"] = new SelectList(await _roomService.GetAllRoomAsync(), "RoomId", "RoomNumber");
                 return Page();
             }
 
-            _context.Attach(BookingDetail).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _bookingDetailService.UpdateBookingDetailAsync(BookingDetail);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookingDetailExists(BookingDetail.BookingReservationId))
+                if (!BookingDetailExists(BookingDetail.BookingReservationId, BookingDetail.RoomId))
                 {
                     return NotFound();
                 }
@@ -71,9 +83,10 @@ namespace FUMiniHotelManagement.Razor.Pages.BookingDetailPage
             return RedirectToPage("./Index");
         }
 
-        private bool BookingDetailExists(Guid id)
+        private bool BookingDetailExists(Guid id, Guid roomId)
         {
-          return (_context.BookingDetails?.Any(e => e.BookingReservationId == id)).GetValueOrDefault();
+            return _bookingDetailService.GetAllBookingDetailByBookingIdAsync(id).GetAwaiter().GetResult()
+                .FirstOrDefault(x => x.RoomId == roomId) is not null;
         }
     }
 }

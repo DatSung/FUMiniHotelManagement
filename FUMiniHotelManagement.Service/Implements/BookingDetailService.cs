@@ -26,7 +26,7 @@ namespace FUMiniHotelManagement.Service.Implements
 
 		public async Task<bool> DeleteBookingDetailAsync(BookingDetail bookingDetail)
 		{
-			return await repository.CreateBookingDetailAsync(bookingDetail);
+			return await repository.DeleteBookingDetailAsync(bookingDetail);
 		}
 
 		public async Task<IEnumerable<BookingDetail>> GetAllBookingDetailAsync()

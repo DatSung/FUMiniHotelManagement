@@ -13,6 +13,7 @@
         Response.Redirect("/Login");
         return;
     }
+
     if (role.Trim() != StaticUserRole.Admin.Trim())
     {
         Response.Redirect("/Unauthorize");
@@ -27,27 +28,28 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDetail[0].StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDetail[0].EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDetail[0].ActualPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDetail[0].BookingReservation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDetail[0].Room)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDetail[0].StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDetail[0].EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDetail[0].ActualPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDetail[0].BookingReservation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDetail[0].Room)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.BookingDetail) {
+    @foreach (var item in Model.BookingDetail)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
@@ -65,11 +67,11 @@
                 @Html.DisplayFor(modelItem => item.Room.RoomNumber)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-page="./Edit" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId">Delete</a> 
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

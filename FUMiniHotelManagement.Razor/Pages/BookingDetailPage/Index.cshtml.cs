@@ -7,28 +7,37 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.BookingDetailPage
 {
     public class IndexModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IBookingDetailService _bookingDetailService;
+        private readonly IBookingService _bookingService;
+        private readonly IRoomService _roomService;
 
-        public IndexModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public IndexModel(IBookingDetailService bookingDetailService, IBookingService bookingService,
+            IRoomService roomService)
         {
-            _context = context;
+            _bookingDetailService = bookingDetailService;
+            _bookingService = bookingService;
+            _roomService = roomService;
         }
 
-        public IList<BookingDetail> BookingDetail { get;set; } = default!;
+        public IList<BookingDetail> BookingDetail { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.BookingDetails != null)
+            var bookingDetails = await _bookingDetailService.GetAllBookingDetailAsync();
+            foreach (var bookingDetail in bookingDetails)
             {
-                BookingDetail = await _context.BookingDetails
-                .Include(b => b.BookingReservation)
-                .Include(b => b.Room).ToListAsync();
+                bookingDetail.BookingReservation =
+                    await _bookingService.GetBookingByIdAsync(bookingDetail.BookingReservationId);
+                bookingDetail.Room = await _roomService.GetRoomByIdAsync(bookingDetail.RoomId);
             }
+
+            BookingDetail = bookingDetails.ToList();
         }
     }
 }
