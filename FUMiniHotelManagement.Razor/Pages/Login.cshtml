@@ -1,25 +1,50 @@
 ﻿@page
+@using FUMiniHotelManagement.Razor.Constant
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model FUMiniHotelManagement.Razor.Pages.LoginModel
 @{
     ViewData["Title"] = "Login page";
 }
 
-<div class="text-center">
-    <form method="post">
-        <div class="form-group">
-            <label asp-for="LoginInput.Email"></label>
-            <input asp-for="LoginInput.Email" class="form-control" />
-            <span asp-validation-for="LoginInput.Email" class="text-danger"></span>
+@{
+    var role = HttpContext.Session.GetString("Role");
+    if (role is not null)
+    {
+        if (role.Trim() == StaticUserRole.Admin.Trim())
+        {
+            Response.Redirect("/");
+            return;
+        }
+
+        Response.Redirect("/");
+        return;
+    }
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">@ViewData["Title"]</h3>
+                    <form method="post">
+                        <div class="form-group">
+                            <label asp-for="LoginInput.Email"></label>
+                            <input asp-for="LoginInput.Email" class="form-control" placeholder="Enter your email"/>
+                            <span asp-validation-for="LoginInput.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LoginInput.Password"></label>
+                            <input asp-for="LoginInput.Password" class="form-control" type="password" placeholder="Enter your password"/>
+                            <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mt-4">Login</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="LoginInput.Password"></label>
-            <input asp-for="LoginInput.Password" class="form-control" type="password" />
-            <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+    </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

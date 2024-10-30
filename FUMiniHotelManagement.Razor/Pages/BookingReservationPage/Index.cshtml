@@ -3,67 +3,55 @@
 @model FUMiniHotelManagement.Razor.Pages.BookingReservationPage.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+ViewData["Title"] = "Booking Reservations";
 }
 
 @{
-    var role = HttpContext.Session.GetString("Role");
-    if (role is null)
-    {
-        Response.Redirect("/Login");
-        return;
-    }
-    if (role.Trim() != StaticUserRole.Admin.Trim())
-    {
-        Response.Redirect("/Unauthorize");
-        return;
-    }
+var role = HttpContext.Session.GetString("Role");
+if (role is null)
+{
+Response.Redirect("/Login");
+return;
+}
+if (role.Trim() != StaticUserRole.Admin.Trim())
+{
+Response.Redirect("/Unauthorize");
+return;
+}
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1 class="text-primary">Booking Reservations Management</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+    <div class="mb-3">
+        <a asp-page="Create" class="btn btn-success">Create New Reservation</a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingReservation[0].BookingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingReservation[0].TotalPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingReservation[0].BookingStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingReservation[0].Customer)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.BookingReservation[0].BookingDate)</th>
+            <th>@Html.DisplayNameFor(model => model.BookingReservation[0].TotalPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.BookingReservation[0].BookingStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.BookingReservation[0].Customer)</th>
+            <th>Actions</th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.BookingReservation) {
+        </thead>
+        <tbody>
+        @foreach (var item in Model.BookingReservation)
+        {
         <tr>
+            <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+            <td>@Html.DisplayFor(modelItem => item.BookingStatus)</td>
+            <td>@Html.DisplayFor(modelItem => item.Customer.EmailAddress)</td>
             <td>
-                @Html.DisplayFor(modelItem => item.BookingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.EmailAddress)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.BookingReservationId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.BookingReservationId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.BookingReservationId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.BookingReservationId" class="btn btn-warning btn-sm">Edit</a>
+                <a asp-page="./Details" asp-route-id="@item.BookingReservationId" class="btn btn-info btn-sm">Details</a>
+                <a asp-page="./Delete" asp-route-id="@item.BookingReservationId" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
-}
-    </tbody>
-</table>
+        }
+        </tbody>
+    </table>
+</div>

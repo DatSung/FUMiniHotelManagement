@@ -3,7 +3,7 @@
 @model FUMiniHotelManagement.Razor.Pages.RoomPage.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Room Information";
 }
 
 @{
@@ -13,6 +13,7 @@
         Response.Redirect("/Login");
         return;
     }
+
     if (role.Trim() != StaticUserRole.Admin.Trim())
     {
         Response.Redirect("/Unauthorize");
@@ -20,28 +21,28 @@
     }
 }
 
-<h1>Edit</h1>
+<h1>Edit Room Information</h1>
 
-<h4>RoomInformation</h4>
-<hr />
+<h4>Room Information</h4>
+<hr/>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="RoomInformation.RoomId" />
+            <input type="hidden" asp-for="RoomInformation.RoomId"/>
             <div class="form-group">
                 <label asp-for="RoomInformation.RoomNumber" class="control-label"></label>
-                <input asp-for="RoomInformation.RoomNumber" class="form-control" />
+                <input asp-for="RoomInformation.RoomNumber" class="form-control"/>
                 <span asp-validation-for="RoomInformation.RoomNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RoomInformation.RoomDetailDescription" class="control-label"></label>
-                <input asp-for="RoomInformation.RoomDetailDescription" class="form-control" />
+                <input asp-for="RoomInformation.RoomDetailDescription" class="form-control"/>
                 <span asp-validation-for="RoomInformation.RoomDetailDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RoomInformation.RoomMaxCapacity" class="control-label"></label>
-                <input asp-for="RoomInformation.RoomMaxCapacity" class="form-control" />
+                <input asp-for="RoomInformation.RoomMaxCapacity" class="form-control" type="number"/>
                 <span asp-validation-for="RoomInformation.RoomMaxCapacity" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,25 +52,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="RoomInformation.RoomStatus" class="control-label"></label>
-                <input asp-for="RoomInformation.RoomStatus" class="form-control" />
+                <input asp-for="RoomInformation.RoomStatus" class="form-control"/>
                 <span asp-validation-for="RoomInformation.RoomStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RoomInformation.RoomPricePerDay" class="control-label"></label>
-                <input asp-for="RoomInformation.RoomPricePerDay" class="form-control" />
+                <input asp-for="RoomInformation.RoomPricePerDay" class="form-control" type="number"/>
                 <span asp-validation-for="RoomInformation.RoomPricePerDay" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save Changes" class="btn btn-primary"/>
+                <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

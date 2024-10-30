@@ -3,7 +3,7 @@
 @model FUMiniHotelManagement.Razor.Pages.RoomTypePage.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Room Type";
 }
 
 @{
@@ -13,6 +13,7 @@
         Response.Redirect("/Login");
         return;
     }
+
     if (role.Trim() != StaticUserRole.Admin.Trim())
     {
         Response.Redirect("/Unauthorize");
@@ -20,40 +21,37 @@
     }
 }
 
-<h1>Create</h1>
+<h1>Create Room Type</h1>
 
-<h4>RoomType</h4>
-<hr />
+<h4>Enter Room Type Details</h4>
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="RoomType.RoomTypeName" class="control-label"></label>
-                <input asp-for="RoomType.RoomTypeName" class="form-control" />
+                <input asp-for="RoomType.RoomTypeName" class="form-control"/>
                 <span asp-validation-for="RoomType.RoomTypeName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RoomType.TypeDescription" class="control-label"></label>
-                <input asp-for="RoomType.TypeDescription" class="form-control" />
+                <input asp-for="RoomType.TypeDescription" class="form-control"/>
                 <span asp-validation-for="RoomType.TypeDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RoomType.TypeNote" class="control-label"></label>
-                <input asp-for="RoomType.TypeNote" class="form-control" />
+                <input asp-for="RoomType.TypeNote" class="form-control"/>
                 <span asp-validation-for="RoomType.TypeNote" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary"/>
+                <a asp-page="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

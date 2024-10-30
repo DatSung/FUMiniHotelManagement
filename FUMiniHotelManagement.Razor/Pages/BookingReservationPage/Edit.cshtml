@@ -3,16 +3,17 @@
 @model FUMiniHotelManagement.Razor.Pages.BookingReservationPage.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Booking Reservation";
 }
 
 @{
-	var role = HttpContext.Session.GetString("Role");
-	if (role is null)
-	{
-		Response.Redirect("/Login");
-		return;
-	}
+    var role = HttpContext.Session.GetString("Role");
+    if (role is null)
+    {
+        Response.Redirect("/Login");
+        return;
+    }
+
     if (role.Trim() != StaticUserRole.Admin.Trim())
     {
         Response.Redirect("/Unauthorize");
@@ -20,46 +21,51 @@
     }
 }
 
-<h1>Edit</h1>
+<h1>Edit Booking Reservation</h1>
 
-<h4>BookingReservation</h4>
-<hr />
+<h4>Booking Reservation Details</h4>
+<hr/>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="BookingReservation.BookingReservationId" />
+            <input type="hidden" asp-for="BookingReservation.BookingReservationId"/>
+
             <div class="form-group">
                 <label asp-for="BookingReservation.BookingDate" class="control-label"></label>
-                <input asp-for="BookingReservation.BookingDate" class="form-control" />
+                <input asp-for="BookingReservation.BookingDate" class="form-control" type="date"/>
                 <span asp-validation-for="BookingReservation.BookingDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="BookingReservation.TotalPrice" class="control-label"></label>
-                <input asp-for="BookingReservation.TotalPrice" class="form-control" />
+                <input asp-for="BookingReservation.TotalPrice" class="form-control" type="number"/>
                 <span asp-validation-for="BookingReservation.TotalPrice" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="BookingReservation.CustomerId" class="control-label"></label>
                 <select asp-for="BookingReservation.CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
                 <span asp-validation-for="BookingReservation.CustomerId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="BookingReservation.BookingStatus" class="control-label"></label>
-                <input asp-for="BookingReservation.BookingStatus" class="form-control" />
+                <input asp-for="BookingReservation.BookingStatus" class="form-control"/>
                 <span asp-validation-for="BookingReservation.BookingStatus" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

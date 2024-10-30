@@ -3,7 +3,7 @@
 @model FUMiniHotelManagement.Razor.Pages.RoomPage.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Room Management";
 }
 
 @{
@@ -13,6 +13,7 @@
         Response.Redirect("/Login");
         return;
     }
+
     if (role.Trim() != StaticUserRole.Admin.Trim())
     {
         Response.Redirect("/Unauthorize");
@@ -20,62 +21,42 @@
     }
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1 class="text-primary">Room Management</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+    <div class="mb-3">
+        <a asp-page="Create" class="btn btn-success">Create New Room</a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomInformation[0].RoomNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomInformation[0].RoomDetailDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomInformation[0].RoomMaxCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomInformation[0].RoomStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomInformation[0].RoomPricePerDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomInformation[0].RoomType)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.RoomInformation[0].RoomNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.RoomInformation[0].RoomDetailDescription)</th>
+            <th>@Html.DisplayNameFor(model => model.RoomInformation[0].RoomMaxCapacity)</th>
+            <th>@Html.DisplayNameFor(model => model.RoomInformation[0].RoomStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.RoomInformation[0].RoomPricePerDay)</th>
+            <th>@Html.DisplayNameFor(model => model.RoomInformation[0].RoomType)</th>
+            <th>Actions</th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.RoomInformation) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomDetailDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomMaxCapacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomPricePerDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomType.RoomTypeName)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.RoomId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RoomId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RoomId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.RoomInformation)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.RoomNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.RoomDetailDescription)</td>
+                <td>@Html.DisplayFor(modelItem => item.RoomMaxCapacity)</td>
+                <td>@Html.DisplayFor(modelItem => item.RoomStatus)</td>
+                <td>@Html.DisplayFor(modelItem => item.RoomPricePerDay)</td>
+                <td>@Html.DisplayFor(modelItem => item.RoomType.RoomTypeName)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.RoomId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.RoomId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.RoomId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

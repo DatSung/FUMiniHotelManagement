@@ -3,86 +3,60 @@
 @model FUMiniHotelManagement.Razor.Pages.UserPage.IndexModel
 
 @{
-	ViewData["Title"] = "Index";
+    ViewData["Title"] = "User Management";
 }
 
 @{
-	var role = HttpContext.Session.GetString("Role");
-	if (role is null)
-	{
-		Response.Redirect("/Login");
-		return;
-	}
-	if (role.Trim() != StaticUserRole.Admin.Trim())
-	{
-		Response.Redirect("/Unauthorize");
-		return;
-	}
+    var role = HttpContext.Session.GetString("Role");
+    if (role is null)
+    {
+        Response.Redirect("/Login");
+        return;
+    }
+
+    if (role.Trim() != StaticUserRole.Admin.Trim())
+    {
+        Response.Redirect("/Unauthorize");
+        return;
+    }
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1 class="text-primary">User Management</h1>
 
-<p>
-	<a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.User[0].FullName)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.User[0].Telephone)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.User[0].EmailAddress)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.User[0].Birthday)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.User[0].Status)
-			</th>
-			@*  <th>
-			@Html.DisplayNameFor(model => model.User[0].Password)
-			</th> *@
-			<th>
-				@Html.DisplayNameFor(model => model.User[0].Role)
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model.User)
-		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.FullName)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Telephone)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.EmailAddress)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Birthday)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Status)
-				</td>
-				@*  <td>
-			@Html.DisplayFor(modelItem => item.Password)
-			</td> *@
-				<td>
-					@Html.DisplayFor(modelItem => item.Role)
-				</td>
-				<td>
-					<a asp-page="./Edit" asp-route-id="@item.UserId">Edit</a> |
-					<a asp-page="./Details" asp-route-id="@item.UserId">Details</a> |
-					<a asp-page="./Delete" asp-route-id="@item.UserId">Delete</a>
-				</td>
-			</tr>
-		}
-	</tbody>
-</table>
+    <div class="mb-3">
+        <a asp-page="Create" class="btn btn-success">Create New User</a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.User[0].FullName)</th>
+            <th>@Html.DisplayNameFor(model => model.User[0].Telephone)</th>
+            <th>@Html.DisplayNameFor(model => model.User[0].EmailAddress)</th>
+            <th>@Html.DisplayNameFor(model => model.User[0].Birthday)</th>
+            <th>@Html.DisplayNameFor(model => model.User[0].Status)</th>
+            <th>@Html.DisplayNameFor(model => model.User[0].Role)</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.User)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Telephone)</td>
+                <td>@Html.DisplayFor(modelItem => item.EmailAddress)</td>
+                <td>@Html.DisplayFor(modelItem => item.Birthday)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.UserId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.UserId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.UserId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

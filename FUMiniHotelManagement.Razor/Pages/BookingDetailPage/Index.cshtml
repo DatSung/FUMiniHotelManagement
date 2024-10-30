@@ -3,7 +3,7 @@
 @model FUMiniHotelManagement.Razor.Pages.BookingDetailPage.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Booking Details";
 }
 
 @{
@@ -21,57 +21,40 @@
     }
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1 class="text-primary">Booking Details Management</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BookingDetail[0].StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookingDetail[0].EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookingDetail[0].ActualPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookingDetail[0].BookingReservation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookingDetail[0].Room)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.BookingDetail)
-    {
+    <div class="mb-3">
+        <a asp-page="Create" class="btn btn-success">Create New Detail</a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActualPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingReservation.BookingReservationId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.RoomNumber)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId">Delete</a> 
-            </td>
+            <th>@Html.DisplayNameFor(model => model.BookingDetail[0].StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.BookingDetail[0].EndDate)</th>
+            <th>@Html.DisplayNameFor(model => model.BookingDetail[0].ActualPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.BookingDetail[0].BookingReservation)</th>
+            <th>@Html.DisplayNameFor(model => model.BookingDetail[0].Room)</th>
+            <th>Actions</th>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.BookingDetail)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.ActualPrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.BookingReservation.BookingReservationId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Room.RoomNumber)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.BookingReservationId" asp-route-roomId="@item.RoomId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

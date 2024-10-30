@@ -3,7 +3,7 @@
 @model FUMiniHotelManagement.Razor.Pages.RoomTypePage.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Room Type Management";
 }
 
 @{
@@ -13,6 +13,7 @@
         Response.Redirect("/Login");
         return;
     }
+
     if (role.Trim() != StaticUserRole.Admin.Trim())
     {
         Response.Redirect("/Unauthorize");
@@ -20,44 +21,36 @@
     }
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1 class="text-primary">Room Type Management</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+    <div class="mb-3">
+        <a asp-page="Create" class="btn btn-success">Create New Room Type</a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomType[0].RoomTypeName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomType[0].TypeDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomType[0].TypeNote)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.RoomType[0].RoomTypeName)</th>
+            <th>@Html.DisplayNameFor(model => model.RoomType[0].TypeDescription)</th>
+            <th>@Html.DisplayNameFor(model => model.RoomType[0].TypeNote)</th>
+            <th>Actions</th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.RoomType) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeNote)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.RoomTypeId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RoomTypeId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RoomTypeId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.RoomType)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.RoomTypeName)</td>
+                <td>@Html.DisplayFor(modelItem => item.TypeDescription)</td>
+                <td>@Html.DisplayFor(modelItem => item.TypeNote)</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.RoomTypeId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.RoomTypeId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.RoomTypeId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

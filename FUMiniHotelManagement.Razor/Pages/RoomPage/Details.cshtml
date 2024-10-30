@@ -3,68 +3,69 @@
 @model FUMiniHotelManagement.Razor.Pages.RoomPage.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+ViewData["Title"] = "Room Details";
 }
 
 @{
-    var role = HttpContext.Session.GetString("Role");
-    if (role is null)
-    {
-        Response.Redirect("/Login");
-        return;
-    }
-    if (role.Trim() != StaticUserRole.Admin.Trim())
-    {
-        Response.Redirect("/Unauthorize");
-        return;
-    }
+var role = HttpContext.Session.GetString("Role");
+if (role is null)
+{
+Response.Redirect("/Login");
+return;
+}
+if (role.Trim() != StaticUserRole.Admin.Trim())
+{
+Response.Redirect("/Unauthorize");
+return;
+}
 }
 
-<h1>Details</h1>
+<h1>Room Details</h1>
 
 <div>
-    <h4>RoomInformation</h4>
+    <h4>Room Information</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.RoomInformation.RoomNumber)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.RoomInformation.RoomNumber)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.RoomInformation.RoomDetailDescription)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.RoomInformation.RoomDetailDescription)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.RoomInformation.RoomMaxCapacity)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.RoomInformation.RoomMaxCapacity)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.RoomInformation.RoomStatus)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.RoomInformation.RoomStatus)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.RoomInformation.RoomPricePerDay)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.RoomInformation.RoomPricePerDay)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.RoomInformation.RoomType)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.RoomInformation.RoomType.RoomTypeName)
         </dd>
     </dl>
 </div>
+
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.RoomInformation?.RoomId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.RoomInformation?.RoomId" class="btn btn-primary">Edit</a>
+    <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
 </div>
