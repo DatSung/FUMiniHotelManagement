@@ -14,10 +14,14 @@ namespace FUMiniHotelManagement.Razor.Pages.BookingDetailPage
     public class DetailsModel : PageModel
     {
         private readonly IBookingDetailService _bookingDetailService;
+        private readonly IRoomService _roomService;
+        private readonly IBookingService _bookingService;
 
-        public DetailsModel(IBookingDetailService bookingDetailService)
+        public DetailsModel(IBookingDetailService bookingDetailService, IRoomService roomService, IBookingService bookingService)
         {
             _bookingDetailService = bookingDetailService;
+            _roomService = roomService;
+            _bookingService = bookingService;
         }
 
         public BookingDetail BookingDetail { get; set; } = default!;
@@ -31,6 +35,9 @@ namespace FUMiniHotelManagement.Razor.Pages.BookingDetailPage
 
             var bookingdetail = _bookingDetailService.GetAllBookingDetailByBookingIdAsync(id.Value).GetAwaiter()
                 .GetResult().FirstOrDefault(x => x.RoomId == roomId);
+            bookingdetail.Room = await _roomService.GetRoomByIdAsync(bookingdetail.RoomId);
+            bookingdetail.BookingReservation =
+                await _bookingService.GetBookingByIdAsync(bookingdetail.BookingReservationId);
             if (bookingdetail == null)
             {
                 return NotFound();

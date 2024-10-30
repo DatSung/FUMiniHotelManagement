@@ -55,15 +55,11 @@ namespace FUMiniHotelManagement.Razor.Pages.BookingDetailPage
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                ViewData["BookingReservationId"] = new SelectList(await _bookingService.GetAllBookingAsync(),
-                    "BookingReservationId",
-                    "BookingReservationId");
-                ViewData["RoomId"] = new SelectList(await _roomService.GetAllRoomAsync(), "RoomId", "RoomNumber");
-                return Page();
-            }
-
+            ViewData["BookingReservationId"] = new SelectList(await _bookingService.GetAllBookingAsync(),
+                "BookingReservationId",
+                "BookingReservationId");
+            ViewData["RoomId"] = new SelectList(await _roomService.GetAllRoomAsync(), "RoomId", "RoomNumber");
+            
             try
             {
                 await _bookingDetailService.UpdateBookingDetailAsync(BookingDetail);

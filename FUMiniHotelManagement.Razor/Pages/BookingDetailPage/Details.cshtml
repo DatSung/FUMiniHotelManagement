@@ -13,6 +13,7 @@
         Response.Redirect("/Login");
         return;
     }
+
     if (role.Trim() != StaticUserRole.Admin.Trim())
     {
         Response.Redirect("/Unauthorize");
@@ -24,7 +25,7 @@
 
 <div>
     <h4>BookingDetail</h4>
-    <hr />
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BookingDetail.StartDate)
@@ -59,6 +60,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-page="./Edit" asp-route-id="@Model.BookingDetail.BookingReservationId" asp-route-roomId="@Model.BookingDetail.RoomId">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
