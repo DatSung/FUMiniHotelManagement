@@ -25,15 +25,18 @@ namespace FUMiniHotelManagement.WPF.Pages
     {
         private Guid bookingId;
         private IBookingDetailService bookingDetailService;
-        public BookingDetailTablePage()
+        private IBookingService _bookingService;
+        public BookingDetailTablePage(IBookingService bookingService)
         {
+            _bookingService = bookingService;
             InitializeComponent();
         }
 
-        public BookingDetailTablePage(Guid bookingId)
+        public BookingDetailTablePage(Guid bookingId, IBookingService bookingService)
         {
             InitializeComponent();
             this.bookingId = bookingId;
+            _bookingService = bookingService;
             this.bookingDetailService = new BookingDetailService();
         }
 
@@ -71,6 +74,7 @@ namespace FUMiniHotelManagement.WPF.Pages
                 }
 
                 await bookingDetailService.DeleteBookingDetailAsync(selectedBookingDetail);
+                
                 await RefreshListView();
             }
         }
@@ -88,6 +92,15 @@ namespace FUMiniHotelManagement.WPF.Pages
         private async Task RefreshListView()
         {
             BookingDetailListView.ItemsSource = await bookingDetailService.GetAllBookingDetailByBookingIdAsync(bookingId);
+        }
+
+        private async Task CalculateBookingTotalPrice()
+        {
+            var bookingDetails = await bookingDetailService.GetAllBookingDetailByBookingIdAsync(bookingId);
+            var totalPrice = bookingDetails.Sum(x => x.ActualPrice);
+            var booking = await _bookingService.GetBookingByIdAsync(bookingId);
+            booking.TotalPrice = totalPrice;
+            await _bookingService.UpdateBookingAsync(booking);
         }
     }
 }
