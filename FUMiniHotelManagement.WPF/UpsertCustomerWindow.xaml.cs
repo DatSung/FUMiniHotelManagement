@@ -17,118 +17,126 @@ using System.Windows.Shapes;
 
 namespace FUMiniHotelManagement.WPF
 {
-	/// <summary>
-	/// Interaction logic for UpsertCustomerWindow.xaml
-	/// </summary>
-	public partial class UpsertCustomerWindow : Window
-	{
+    /// <summary>
+    /// Interaction logic for UpsertCustomerWindow.xaml
+    /// </summary>
+    public partial class UpsertCustomerWindow : Window
+    {
+        private IUserService userService;
+        private Func<Task> refreshListView;
+        private User? user;
 
-		private IUserService userService;
-		private Func<Task> refreshListView;
-		private User? user;
+        public UpsertCustomerWindow()
+        {
+            InitializeComponent();
+        }
 
-		public UpsertCustomerWindow()
-		{
-			InitializeComponent();
-		}
+        public UpsertCustomerWindow(IUserService userService, Func<Task> refreshListView, User? user)
+        {
+            InitializeComponent();
+            this.userService = userService;
+            this.refreshListView = refreshListView;
+            this.user = user;
+        }
 
-		public UpsertCustomerWindow(IUserService userService, Func<Task> refreshListView, User? user)
-		{
-			InitializeComponent();
-			this.userService = userService;
-			this.refreshListView = refreshListView;
-			this.user = user;
-		}
+        public UpsertCustomerWindow(IUserService userService, Func<Task> refreshListView)
+        {
+            InitializeComponent();
+            this.userService = userService;
+            this.refreshListView = refreshListView;
+            user = null;
+        }
 
-		public UpsertCustomerWindow(IUserService userService, Func<Task> refreshListView)
-		{
-			InitializeComponent();
-			this.userService = userService;
-			this.refreshListView = refreshListView;
-			user = null;
-		}
+        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (user is null)
+                {
+                    var user = FillUserWithForm();
 
-		private async void SubmitButton_Click(object sender, RoutedEventArgs e)
-		{
-			if (user is null)
-			{
+                    var result = await userService.CreateUserAsync(user);
 
-				var user = FillUserWithForm();
+                    if (result is false)
+                    {
+                        MessageBox.Show("Something went wrong!");
+                        return;
+                    }
 
-				var result = await userService.CreateUserAsync(user);
+                    await refreshListView();
+                    this.Close();
+                }
 
-				if (result is false)
-				{
-					MessageBox.Show("Something went wrong!");
-					return;
-				}
-				await refreshListView();
-				this.Close();
-			}
+                if (user is not null)
+                {
+                    var user = FillUserWithForm();
+                    var result = await userService.UpdateUserAsync(user);
+                    if (result is false)
+                    {
+                        MessageBox.Show("Something went wrong!");
+                        return;
+                    }
 
-			if (user is not null)
-			{
-				var user = FillUserWithForm();
-				var result = await userService.UpdateUserAsync(user);
-				if (result is false)
-				{
-					MessageBox.Show("Something went wrong!");
-					return;
-				}
-				await refreshListView();
-				this.Close();
-			}
+                    await refreshListView();
+                    this.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Something went wrong!");
+                return;
+            }
+        }
 
-		}
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
-		private void CancelButton_Click(object sender, RoutedEventArgs e)
-		{
-			this.Close();
-		}
+        private void FillFormWithUser(User user)
+        {
+            UserIdText.Text = user.UserId.ToString();
+            BirthdayDatePicker.SelectedDate = user.Birthday;
+            EmailAddressText.Text = user.EmailAddress;
+            FullNameText.Text = user.FullName;
+            PasswordText.Password = user.Password;
+            RoleComboBox.SelectedIndex = user.Role!.ToLower().Trim() == "admin" ? 0 : 1;
+            StatusComboBox.SelectedIndex = user.Status!.ToLower().Trim() == "activated" ? 0 : 1;
+            TelephoneText.Text = user.Telephone;
+        }
 
-		private void FillFormWithUser(User user)
-		{
-			UserIdText.Text = user.UserId.ToString();
-			BirthdayDatePicker.SelectedDate = user.Birthday;
-			EmailAddressText.Text = user.EmailAddress;
-			FullNameText.Text = user.FullName;
-			PasswordText.Password = user.Password;
-			RoleComboBox.SelectedIndex = user.Role!.ToLower().Trim() == "admin" ? 0 : 1;
-			StatusComboBox.SelectedIndex = user.Status!.ToLower().Trim() == "activated" ? 0 : 1;
-			TelephoneText.Text = user.Telephone;
-		}
+        private User FillUserWithForm()
+        {
+            var selectedRoleItem = (ComboBoxItem)RoleComboBox.SelectedItem;
+            string selectedRole = selectedRoleItem.Content.ToString()!;
 
-		private User FillUserWithForm()
-		{
-			var selectedRoleItem = (ComboBoxItem)RoleComboBox.SelectedItem;
-			string selectedRole = selectedRoleItem.Content.ToString()!;
+            var selectedStatusItem = (ComboBoxItem)StatusComboBox.SelectedItem;
+            string selectedStatus = selectedStatusItem.Content.ToString()!;
 
-			var selectedStatusItem = (ComboBoxItem)StatusComboBox.SelectedItem;
-			string selectedStatus = selectedStatusItem.Content.ToString()!;
+            return new User()
+            {
+                UserId = user is null ? Guid.NewGuid() : user.UserId,
+                Birthday = BirthdayDatePicker.SelectedDate,
+                EmailAddress = EmailAddressText.Text,
+                FullName = FullNameText.Text,
+                Password = PasswordText.Password,
+                Role = selectedRole,
+                Status = selectedStatus,
+                Telephone = TelephoneText.Text
+            };
+        }
 
-			return new User()
-			{
-				UserId = user is null ? Guid.NewGuid() : user.UserId,
-				Birthday = BirthdayDatePicker.SelectedDate,
-				EmailAddress = EmailAddressText.Text,
-				FullName = FullNameText.Text,
-				Password = PasswordText.Password,
-				Role = selectedRole,
-				Status = selectedStatus,
-				Telephone = TelephoneText.Text
-			};
-		}
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (user is not null)
+            {
+                this.Title = "Update user";
+                PasswordText.IsEnabled = false;
+                EmailAddressText.IsEnabled = false;
+                FillFormWithUser(user);
+            }
 
-		private void OnLoaded(object sender, RoutedEventArgs e)
-		{
-			if (user is not null)
-			{
-				this.Title = "Update user";
-				PasswordText.IsEnabled = false;
-				EmailAddressText.IsEnabled = false;
-				FillFormWithUser(user);
-			}
-			this.Title = "Create user";
-		}
-	}
+            this.Title = "Create user";
+        }
+    }
 }
