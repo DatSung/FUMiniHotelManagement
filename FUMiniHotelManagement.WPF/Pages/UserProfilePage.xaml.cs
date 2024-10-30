@@ -128,25 +128,29 @@ namespace FUMiniHotelManagement.WPF.Pages
 
         private async void UploadImage_Click(object sender, RoutedEventArgs e)
         {
-            // Tạo một instance của OpenFileDialog
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            // Cài đặt bộ lọc file (có thể thay đổi theo nhu cầu)
-            openFileDialog.Filter = "All files (*.*)|*.*";
-
-            // Hiển thị hộp thoại để chọn file
-            if (openFileDialog.ShowDialog() == true)
+            try
             {
-                // Lấy đường dẫn file đã chọn
-                string filePath = openFileDialog.FileName;
+                OpenFileDialog openFileDialog = new OpenFileDialog();
 
-                var url = SaveFile(filePath);
-                admin.AvatarUrl = url;
+                openFileDialog.Filter = "All files (*.*)|*.*";
 
-                await userService.UpdateUserAsync(admin);
-                UserAvatarImage.Source = new BitmapImage(new Uri(url));
-                UpdateAdminAvatar(url);
-                MessageBox.Show("Update user avatar successfully!");
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string filePath = openFileDialog.FileName;
+
+                    var url = SaveFile(filePath);
+                    admin.AvatarUrl = url;
+
+                    await userService.UpdateUserAsync(admin);
+                    UserAvatarImage.Source = new BitmapImage(new Uri(url));
+                    UpdateAdminAvatar(url);
+                    MessageBox.Show("Update user avatar successfully!");
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Something went wrong!");
+                return;
             }
         }
 
