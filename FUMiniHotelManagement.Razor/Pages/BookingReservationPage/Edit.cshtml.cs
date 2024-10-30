@@ -8,35 +8,38 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.BookingReservationPage
 {
     public class EditModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IBookingService _bookingService;
+        private readonly IUserService _userService;
 
-        public EditModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public EditModel(IBookingService bookingService, IUserService userService)
         {
-            _context = context;
+            _bookingService = bookingService;
+            _userService = userService;
         }
 
-        [BindProperty]
-        public BookingReservation BookingReservation { get; set; } = default!;
+        [BindProperty] public BookingReservation BookingReservation { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.BookingReservations == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var bookingreservation =  await _context.BookingReservations.FirstOrDefaultAsync(m => m.BookingReservationId == id);
+            var bookingreservation = await _bookingService.GetBookingByIdAsync(id.Value);
             if (bookingreservation == null)
             {
                 return NotFound();
             }
+
             BookingReservation = bookingreservation;
-           ViewData["CustomerId"] = new SelectList(_context.Users, "UserId", "EmailAddress");
+            ViewData["CustomerId"] = new SelectList(await _userService.GetAllUserAsync(), "UserId", "EmailAddress");
             return Page();
         }
 
@@ -44,16 +47,10 @@ namespace FUMiniHotelManagement.Razor.Pages.BookingReservationPage
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(BookingReservation).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _bookingService.UpdateBookingAsync(BookingReservation);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,7 +69,7 @@ namespace FUMiniHotelManagement.Razor.Pages.BookingReservationPage
 
         private bool BookingReservationExists(Guid id)
         {
-          return (_context.BookingReservations?.Any(e => e.BookingReservationId == id)).GetValueOrDefault();
+            return _bookingService.GetBookingByIdAsync(id).GetAwaiter().GetResult() is not null;
         }
     }
 }

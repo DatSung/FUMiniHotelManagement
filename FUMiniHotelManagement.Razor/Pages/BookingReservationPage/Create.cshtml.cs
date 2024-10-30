@@ -7,38 +7,41 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.BookingReservationPage
 {
     public class CreateModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IBookingService _bookingService;
+        private readonly IUserService _userService;
 
-        public CreateModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public CreateModel(IBookingService bookingService, IUserService userService)
         {
-            _context = context;
+            _bookingService = bookingService;
+            _userService = userService;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["CustomerId"] = new SelectList(_context.Users, "UserId", "EmailAddress");
+            ViewData["CustomerId"] = new SelectList(await _userService.GetAllUserAsync(), "UserId", "EmailAddress");
             return Page();
         }
 
-        [BindProperty]
-        public BookingReservation BookingReservation { get; set; } = default!;
-        
+        [BindProperty] public BookingReservation BookingReservation { get; set; } = default!;
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.BookingReservations == null || BookingReservation == null)
+            BookingReservation.BookingReservationId = Guid.NewGuid();
+            if (ModelState.IsValid || BookingReservation == null)
             {
+                ViewData["CustomerId"] = new SelectList(await _userService.GetAllUserAsync(), "UserId", "EmailAddress");
                 return Page();
             }
 
-            _context.BookingReservations.Add(BookingReservation);
-            await _context.SaveChangesAsync();
+            await _bookingService.CreateBookingAsync(BookingReservation);
 
             return RedirectToPage("./Index");
         }

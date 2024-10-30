@@ -7,28 +7,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FUMiniHotelManagement.BusinessObject.Entities;
 using FUMiniHotelManagement.DAO.Context;
+using FUMiniHotelManagement.Service.Interfaces;
 
 namespace FUMiniHotelManagement.Razor.Pages.BookingReservationPage
 {
     public class DetailsModel : PageModel
     {
-        private readonly FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext _context;
+        private readonly IBookingService _bookingService;
 
-        public DetailsModel(FUMiniHotelManagement.DAO.Context.FUMiniHotelManagementContext context)
+        public DetailsModel(IBookingService bookingService)
         {
-            _context = context;
+            _bookingService = bookingService;
         }
 
       public BookingReservation BookingReservation { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.BookingReservations == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var bookingreservation = await _context.BookingReservations.FirstOrDefaultAsync(m => m.BookingReservationId == id);
+            var bookingreservation = await _bookingService.GetBookingByIdAsync(id.Value);
             if (bookingreservation == null)
             {
                 return NotFound();
